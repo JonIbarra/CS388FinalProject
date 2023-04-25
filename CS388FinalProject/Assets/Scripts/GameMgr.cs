@@ -35,8 +35,8 @@ public class GameMgr : MonoBehaviour
     public GameObject mBallPrefab;
     public GameObject mFanPrefab;
 
-    //public UnityEngine.UI.Text mText;
     public TMP_Text mSearchText;
+    public TMP_Text mWinText;
 
     public Button mPlayButton;
     public Button mNorthButton;
@@ -174,6 +174,7 @@ public class GameMgr : MonoBehaviour
         if (seen)
         {
             mSearchText.text = "Searching for a card";
+            mPlayButton.transform.GetChild(0).GetComponent<Text>().text = "Play";
 
             if (playing)
                 Object.Destroy(mBall);
@@ -279,9 +280,12 @@ public class GameMgr : MonoBehaviour
             Vector3 pos = mLaberynth.transform.GetChild(0).transform.GetChild(0).transform.position;
             mBall = Instantiate(mBallPrefab, new Vector3(pos.x, pos.y + 165, pos.z), Quaternion.identity);
             mBall.transform.parent = mLaberynth.transform;
+            mBall.GetComponent<BallController>().mWinText = mWinText;
 
             playing = true;
 
+            mPlayButton.transform.GetChild(0).GetComponent<Text>().text = "Reset";
+            mWinText.color = new Color32(255, 255, 255, 0);
 
             mNorthButton.interactable = true;
             mSouthButton.interactable = true;

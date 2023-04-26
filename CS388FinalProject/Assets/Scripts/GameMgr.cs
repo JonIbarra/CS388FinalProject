@@ -34,6 +34,7 @@ public class GameMgr : MonoBehaviour
 
     public GameObject mBallPrefab;
     public GameObject mFanPrefab;
+    public ParticleSystem mWinningPS;
 
     public TMP_Text mSearchText;
     public TMP_Text mWinText;
@@ -48,6 +49,8 @@ public class GameMgr : MonoBehaviour
     private Image mSouthImage;
     private Image mWestImage;
     private Image mEastImage;
+
+    public Animator mAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -176,6 +179,8 @@ public class GameMgr : MonoBehaviour
             mSearchText.text = "Searching for a card";
             mPlayButton.transform.GetChild(0).GetComponent<Text>().text = "Play";
 
+            mWinText.color = new Color32(255, 255, 255, 0);
+
             if (playing)
                 Object.Destroy(mBall);
 
@@ -189,6 +194,11 @@ public class GameMgr : MonoBehaviour
             mSouthButton.interactable = false;
             mWestButton.interactable = false;
             mEastButton.interactable = false;
+
+            mNorthImage.color = new Color32(253, 88, 49, 255);
+            mSouthImage.color = new Color32(253, 88, 49, 255);
+            mWestImage.color = new Color32(253, 88, 49, 255);
+            mEastImage.color = new Color32(253, 88, 49, 255);
 
             seen = false;
             playing = false;
@@ -281,6 +291,7 @@ public class GameMgr : MonoBehaviour
             mBall = Instantiate(mBallPrefab, new Vector3(pos.x, pos.y + 165, pos.z), Quaternion.identity);
             mBall.transform.parent = mLaberynth.transform;
             mBall.GetComponent<BallController>().mWinText = mWinText;
+            mBall.GetComponent<BallController>().mGameMgr = this;
 
             playing = true;
 
@@ -296,6 +307,17 @@ public class GameMgr : MonoBehaviour
 
     public void PressingBackButton()
     {
+        mAnimator.Play("FadeOut");
+        Invoke("ExitLevel", 2);
+    }
+
+    void ExitLevel()
+    {
         SceneManager.LoadScene(0);
+    }
+
+    public void Win()
+    {
+        Instantiate(mWinningPS, mLaberynth.transform);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     public TMPro.TMP_Text mWinText;
+    public GameMgr mGameMgr;
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +23,6 @@ public class BallController : MonoBehaviour
     {
         Debug.Log("Final hit");
         mWinText.color = new Color32(255, 255, 255, 255);
+        mGameMgr.Win();
     }
 }

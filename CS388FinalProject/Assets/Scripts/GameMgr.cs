@@ -89,25 +89,25 @@ public class GameMgr : MonoBehaviour
         if(front_active)
         {
             mFanFront.transform.GetChild(0).Rotate(mFanSpeed * mDirection * Time.deltaTime);
-            mBall.GetComponent<Rigidbody>().AddForce(-mFanFront.transform.forward * 10000);
+            mBall.GetComponent<Rigidbody>().AddForce(-mFanFront.transform.forward * 100000);
         }
 
         if (back_active)
         {
             mFanBack.transform.GetChild(0).Rotate(mFanSpeed * mDirection * Time.deltaTime);
-            mBall.GetComponent<Rigidbody>().AddForce(-mFanBack.transform.forward * 10000);
+            mBall.GetComponent<Rigidbody>().AddForce(-mFanBack.transform.forward * 100000);
         }
 
         if (left_active)
         {
             mFanLeft.transform.GetChild(0).Rotate(mFanSpeed * mDirection * Time.deltaTime);
-            mBall.GetComponent<Rigidbody>().AddForce(-mFanLeft.transform.forward * 10000);
+            mBall.GetComponent<Rigidbody>().AddForce(-mFanLeft.transform.forward * 100000);
         }
 
         if (right_active)
         {
             mFanRight.transform.GetChild(0).Rotate(mFanSpeed * mDirection * Time.deltaTime);
-            mBall.GetComponent<Rigidbody>().AddForce(-mFanRight.transform.forward * 10000);
+            mBall.GetComponent<Rigidbody>().AddForce(-mFanRight.transform.forward * 100000);
         }
     }
 
@@ -289,6 +289,7 @@ public class GameMgr : MonoBehaviour
         {
             Vector3 pos = mLaberynth.transform.GetChild(0).transform.GetChild(0).transform.position;
             mBall = Instantiate(mBallPrefab, new Vector3(pos.x, pos.y + 165, pos.z), Quaternion.identity);
+            mBall.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             mBall.transform.parent = mLaberynth.transform;
             mBall.GetComponent<BallController>().mWinText = mWinText;
             mBall.GetComponent<BallController>().mGameMgr = this;
@@ -318,6 +319,6 @@ public class GameMgr : MonoBehaviour
 
     public void Win()
     {
-        Instantiate(mWinningPS, mLaberynth.transform);
+        //Instantiate(mWinningPS, mLaberynth.transform);
     }
 }

@@ -1242,4 +1242,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameStartScene: 1
-  mAnimator: {fileID: 0}
+  mAnimator: {fileID: 189056915}

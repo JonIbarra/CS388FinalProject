@@ -84,6 +84,7 @@ public class GameMgr : MonoBehaviour
             //mText.text = "DEACTIVE";
             //
             //mText.text = "ACTIVE: " + (mBall.GetComponent<Rigidbody>().velocity.x) + ", " + (mBall.GetComponent<Rigidbody>().velocity.y) + ", " + (mBall.GetComponent<Rigidbody>().velocity.z);
+            Physics.gravity = mLaberynth.transform.up * (-1000);
         }
 
         if(front_active)
